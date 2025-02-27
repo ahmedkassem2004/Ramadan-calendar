@@ -1,0 +1,54 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1; // Los meses van de 0 a 11
+    
+    // Lista de fechas del calendario
+    const calendarDates = [
+        "27 February", "28 February", "01 March", "02 March", "03 March", "04 March", "05 March", 
+        "06 March", "07 March", "08 March", "09 March", "10 March", "11 March", "12 March", 
+        "13 March", "14 March", "15 March", "16 March", "17 March", "18 March", "19 March", 
+        "20 March", "21 March", "22 March", "23 March", "24 March", "25 March", "26 March", "27 March", "28 March"
+    ];
+    
+    // Buscar la fecha actual en el calendario
+    const formattedDate = day.toString().padStart(2, "0") + " " + getMonthName(month);
+    const index = calendarDates.indexOf(formattedDate);
+    
+    if (index !== -1) {
+        const indicator = document.createElement("div");
+        indicator.classList.add("date-indicator");
+        
+        // Posiciona el indicador junto a la fecha en la imagen
+        const calendarContainer = document.getElementById("calendar-container");
+        const positions = [
+            { top: "10%", left: "70%" }, { top: "13%", left: "70%" }, { top: "16%", left: "70%" },
+            { top: "19%", left: "70%" }, { top: "22%", left: "70%" }, { top: "25%", left: "70%" },
+            { top: "28%", left: "70%" }, { top: "31%", left: "70%" }, { top: "34%", left: "70%" },
+            { top: "37%", left: "70%" }, { top: "40%", left: "70%" }, { top: "43%", left: "70%" },
+            { top: "46%", left: "70%" }, { top: "49%", left: "70%" }, { top: "52%", left: "70%" },
+            { top: "55%", left: "70%" }, { top: "58%", left: "70%" }, { top: "61%", left: "70%" },
+            { top: "64%", left: "70%" }, { top: "67%", left: "70%" }, { top: "70%", left: "70%" },
+            { top: "73%", left: "70%" }, { top: "76%", left: "70%" }, { top: "79%", left: "70%" },
+            { top: "82%", left: "70%" }, { top: "85%", left: "70%" }, { top: "88%", left: "70%" },
+            { top: "91%", left: "70%" }, { top: "94%", left: "70%" }
+        ];
+        
+        if (index < positions.length) {
+            indicator.style.position = "absolute";
+            indicator.style.top = positions[index].top;
+            indicator.style.left = positions[index].left;
+            indicator.style.width = "15px";
+            indicator.style.height = "15px";
+            indicator.style.backgroundColor = "green";
+            indicator.style.borderRadius = "50%";
+            
+            calendarContainer.appendChild(indicator);
+        }
+    }
+    
+    function getMonthName(month) {
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return monthNames[month - 1];
+    }
+});
