@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Ramadán 2025</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+        }
+        .countdown {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+        #notification {
+            display: none;
+            background-color: #ffcc00;
+            color: #000;
+            font-size: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌙 Calendario de Ramadán 2025</h1>
+
+    <div class="container">
+        <p id="today-date"></p>
+        <p id="iftar-time"></p>
+        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <div id="notification">
+        🔔 ¡Es hora de romper el ayuno (Iftar)!
+    </div>
+
+    <script>
+        const ramadanStart = new Date("March 1, 2025"); // Primer día de Ramadán
+        const ramadanEnd = new Date("March 30, 2025"); // Último día de Ramadán
+
+        const ramadanDays = {
+            "1/3/2025": "18:02",
+            "2/3/2025": "18:02",
+            "3/3/2025": "18:02",
+            "4/3/2025": "18:02",
+            "5/3/2025": "18:02",
+            "6/3/2025": "18:02",
+            "7/3/2025": "18:02",
+            "8/3/2025": "18:02",
+            "9/3/2025": "18:02",
+            "10/3/2025": "18:02",
+            "11/3/2025": "18:02",
+            "12/3/2025": "18:02",
+            "13/3/2025": "18:01",
+            "14/3/2025": "18:01",
+            "15/3/2025": "18:01",
+            "16/3/2025": "18:03",
+            "17/3/2025": "18:03",
+            "18/3/2025": "18:03",
+            "19/3/2025": "18:03",
+            "20/3/2025": "18:03",
+            "21/3/2025": "18:03",
+            "22/3/2025": "18:03",
+            "23/3/2025": "18:03",
+            "24/3/2025": "18:03",
+            "25/3/2025": "18:03",
+            "26/3/2025": "18:03",
+            "27/3/2025": "18:03",
+            "28/3/2025": "18:03",
+            "29/3/2025": "18:03",
+            "30/3/2025": "18:03"
+        };
+
+        function actualizarIftar() {
+            let now = new Date();
+            let todayKey = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+            let iftarTime = ramadanDays[todayKey];
+
+            document.getElementById("today-date").innerHTML = `📅 Hoy es: ${todayKey}`;
+
+            // Verifica si estamos dentro de Ramadán
+            if (now >= ramadanStart && now <= ramadanEnd && iftarTime) {
+                document.getElementById("iftar-time").innerHTML = `🕌 Iftar hoy: ${iftarTime} PM`;
+
+                // Calcular tiempo restante
+                let iftarHour = parseInt(iftarTime.split(":")[0]);
+                let iftarMinute = parseInt(iftarTime.split(":")[1]);
+                let iftarDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), iftarHour, iftarMinute, 0);
+
+                let diff = (iftarDateTime - now) / 60000; // Diferencia en minutos
+
+                if (diff > 0) {
+                    document.getElementById("countdown").innerHTML = `⏳ Faltan ${Math.round(diff)} minutos`;
+                } else {
+                    document.getElementById("countdown").innerHTML = `✅ Iftar ya comenzó`;
+                    document.getElementById("notification").style.display = "block";
+                }
+            } else {
+                // Fuera de Ramadán
+                document.getElementById("iftar-time").innerHTML = "🌙 Ramadán aún no ha comenzado.";
+                document.getElementById("countdown").innerHTML = "";
+                document.getElementById("notification").style.display = "none";
+            }
+        }
+
+        actualizarIftar();
+        setInterval(actualizarIftar, 60000);
+    </script>
+</body>
+</html>
+
