@@ -54,7 +54,7 @@
     </div>
 
     <div id="notification">
-        🔔 ¡Es hora de romper el ayuno (Iftar)!
+        🔔 ¡Es hora de romper el ayuno (Eftar)!
     </div>
     
 <a href="calendario.html" class="btn">📅 Ver Calendario</a>
@@ -104,7 +104,7 @@
             document.getElementById("today-date").innerHTML = `📅 Hoy es: ${todayKey}`;
 
             if (now >= ramadanStart && now <= ramadanEnd && iftarTime) {
-                document.getElementById("iftar-time").innerHTML = `🕌 Iftar hoy: ${iftarTime} PM`;
+                document.getElementById("iftar-time").innerHTML = `🕌 Eftar hoy: ${iftarTime} PM`;
 
                 let iftarHour = parseInt(iftarTime.split(":")[0]);
                 let iftarMinute = parseInt(iftarTime.split(":")[1]);
